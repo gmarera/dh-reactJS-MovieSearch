@@ -1,0 +1,81 @@
+.container {
+    max-width: 80%;
+    margin:0 auto;
+    padding: 20px; 
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.5s all ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 16px;
+    transition: 0.3s all ease;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.movie-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    background-color: #e9ecef;
+    color: #000;
+    border: 1px solid #007BFF;
+}
+
+.movie-card img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.movie-card h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+.movie-card p {
+    font-size: 14px;
+    color: #666;
+}
