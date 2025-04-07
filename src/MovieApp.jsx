@@ -5,9 +5,10 @@ export const MovieApp = () => {
 
     const [search, setSearch] = useState('')
     const [movieList, setMovieList] = useState([])
+    const [selectedMovie, setSelectedMovie] = useState(null)
 
     const urlBase = 'https://api.themoviedb.org/3/search/movie'
-    const apiKey = 'API_KEY' // Replace with your actual API key
+    const apiKey = 'api_key' // Reemplaza con tu API key de TMDB
     const lang = 'es-ES'
 
     const handleInputChange = (e) => {
@@ -36,6 +37,13 @@ export const MovieApp = () => {
         setMovieList([])
     }
 
+    const openModal = (movie) => {
+        setSelectedMovie(movie)
+    }
+
+    const closeModal = () => {
+        setSelectedMovie(null)
+    }
     return (
         <div className='container'>
             <h1>Buscador de Películas</h1>
@@ -49,19 +57,36 @@ export const MovieApp = () => {
                 <button>Buscar</button>
                 <button type='button' onClick={() => clearButton()}>Limpiar</button>
             </form>
-            {movieList && 
+            {movieList &&
                 <div className='movie-list'>
                     {movieList.map((movie) => {
                         return (
-                            <div key={movie.id} className='movie-card'>
+                            <div key={movie.id} className='movie-card' onClick={() => openModal(movie)}>
                                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                                 <h2>{movie.title}</h2>
-                                <p>{movie.overview}</p>
+                                <p className='truncate'>{movie.overview}</p>
+                                <button className='ver-mas-btn' onClick={() => openModal(movie)}>Ver Más</button>
                             </div>
                         )
                     })}
                 </div>
             }
+
+            {selectedMovie && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="close-btn" onClick={closeModal}>X</button>
+                        <img src={`https://image.tmdb.org/t/p/w500/${selectedMovie.poster_path}`} alt={selectedMovie.title} />
+                        <h2>{selectedMovie.title}</h2>
+                        <p><strong>Descripción:</strong> {selectedMovie.overview}</p>
+                        <p><strong>Fecha de estreno:</strong> {selectedMovie.release_date}</p>
+                        <p><strong>Popularidad:</strong> {selectedMovie.popularity}</p>
+                        <p><strong>Idioma original:</strong> {selectedMovie.original_language}</p>
+                        <p><strong>Voto promedio:</strong> {selectedMovie.vote_average}</p>
+                        <p><strong>Total de votos:</strong> {selectedMovie.vote_count}</p>
+                    </div>
+                </div>
+            )}
 
         </div>
     )
